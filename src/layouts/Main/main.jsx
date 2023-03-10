@@ -2,7 +2,7 @@ import React from 'react'
 
 const Main = ({children}) => {
     return (
-        <div className="section">
+        <div className="section main">
             {children}
         </div>
     )
