@@ -5,13 +5,13 @@ import Footer from "./layouts/Footer/footer.jsx"
 
 function App() {
   return (
-    <>
+    <div className='d_flex-col h-100'>
         <Header />
         <Main>
             Main
         </Main>
         <Footer />
-    </>
+    </div>
   )
 }
 
