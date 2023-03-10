@@ -1,0 +1,12 @@
+.dirs_header {
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+}
+
+.dirs_items {
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 2.5%;
+    row-gap: 25%;
+}

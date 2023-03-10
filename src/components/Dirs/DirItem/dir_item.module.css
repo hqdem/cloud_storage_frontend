@@ -1,0 +1,19 @@
+.dir_item {
+    display: flex;
+    align-items: center;
+    column-gap: 2.5%;
+    justify-content: left;
+    padding-left: 5%;
+    min-width: 200px;
+    min-height: 60px;
+    border: 1px solid #adadad;
+    border-radius: 25px;
+
+    transition: all .3s ease-in-out;
+}
+
+.dir_item:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #919191;
+}
