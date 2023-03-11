@@ -3,7 +3,8 @@ import DirItem from "./DirItem/DirItem.jsx"
 import classes from './dirs.module.css'
 
 const Dirs = () => {
-    return (<div className={classes.dirs_section}>
+    return (
+        <div>
             <div className={classes.dirs_header}>
                 <span>Папки</span>
             </div>
@@ -14,12 +15,12 @@ const Dirs = () => {
                 <DirItem key={3} name={'Папка'}/>
                 <DirItem key={4} name={'Папка'}/>
                 <DirItem key={5} name={'Папка'}/>
-                <DirItem key={5} name={'Папка'}/>
-                <DirItem key={5} name={'Папка'}/>
-                <DirItem key={5} name={'Папка'}/>
-                <DirItem key={5} name={'Папка'}/>
-                <DirItem key={5} name={'Папка'}/>
-                <DirItem key={5} name={'Папка'}/>
+                <DirItem key={6} name={'Папка'}/>
+                <DirItem key={7} name={'Папка'}/>
+                <DirItem key={8} name={'Папка'}/>
+                <DirItem key={9} name={'Папка'}/>
+                <DirItem key={10} name={'Папка'}/>
+                <DirItem key={11} name={'Папка'}/>
             </div>
 
         </div>)
