@@ -4,9 +4,14 @@
 }
 
 .dirs_items {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     margin: 0 auto;
-    grid-template-columns: repeat(4, 1fr);
     column-gap: 2.5%;
-    row-gap: 25%;
+
+}
+
+.dirs_section {
+    margin-bottom: 50px;
+    /*flex-wrap: inherit;*/
 }

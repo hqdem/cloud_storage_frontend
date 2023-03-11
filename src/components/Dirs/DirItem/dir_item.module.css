@@ -4,10 +4,11 @@
     column-gap: 2.5%;
     justify-content: left;
     padding-left: 5%;
-    min-width: 200px;
+    min-width: 250px;
     min-height: 60px;
     border: 1px solid #adadad;
     border-radius: 25px;
+    margin-bottom: 2.5%;
 
     transition: all .3s ease-in-out;
 }
