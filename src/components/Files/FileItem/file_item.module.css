@@ -8,6 +8,7 @@
     column-gap: 2.5%;
     border-radius: 25px;
     margin-bottom: 2.5%;
+    position: relative;
 
     transition: all .3s ease-in-out;
 }
@@ -16,4 +17,10 @@
     cursor: pointer;
     color: white;
     background-color: #919191;
+}
+
+.file_owner_label {
+    position: absolute;
+    right: 10px;
+    bottom: 3px;
 }
