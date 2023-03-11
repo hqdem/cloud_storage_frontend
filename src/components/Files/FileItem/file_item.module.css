@@ -1,0 +1,19 @@
+.file_item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 250px;
+    min-height: 60px;
+    border: 1px solid #adadad;
+    column-gap: 2.5%;
+    border-radius: 25px;
+    margin-bottom: 2.5%;
+
+    transition: all .3s ease-in-out;
+}
+
+.file_item:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #919191;
+}
