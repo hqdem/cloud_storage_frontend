@@ -10,17 +10,17 @@ const Dirs = () => {
             </div>
 
             <div className={classes.dirs_items}>
-                <DirItem key={1} name={'Папка'}/>
-                <DirItem key={2} name={'Папка'}/>
-                <DirItem key={3} name={'Папка'}/>
-                <DirItem key={4} name={'Папка'}/>
-                <DirItem key={5} name={'Папка'}/>
-                <DirItem key={6} name={'Папка'}/>
-                <DirItem key={7} name={'Папка'}/>
-                <DirItem key={8} name={'Папка'}/>
-                <DirItem key={9} name={'Папка'}/>
-                <DirItem key={10} name={'Папка'}/>
-                <DirItem key={11} name={'Папка'}/>
+                <DirItem key={1} name={'Папка'} owner={'Пользователь'}/>
+                <DirItem key={2} name={'Папка'} owner={'Пользователь'}/>
+                <DirItem key={3} name={'Папка'} owner={'Пользователь'}/>
+                <DirItem key={4} name={'Папка'} owner={'Пользователь'}/>
+                <DirItem key={5} name={'Папка'} owner={'Пользователь'}/>
+                <DirItem key={6} name={'Папка'} owner={'Пользователь'}/>
+                <DirItem key={7} name={'Папка'} owner={'Пользователь'}/>
+                <DirItem key={8} name={'Папка'} owner={'Пользователь'}/>
+                <DirItem key={9} name={'Папка'} owner={'Пользователь'}/>
+                <DirItem key={10} name={'Папка'} owner={'Пользователь'}/>
+                <DirItem key={11} name={'Папка'} owner={'Пользователь'}/>
             </div>
 
         </div>)
