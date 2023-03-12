@@ -1,6 +1,6 @@
 import React from 'react'
-import Dirs from "./Dirs/Dirs.jsx"
-import Files from "./Files/Files.jsx"
+import Dirs from "../Dirs/Dirs"
+import Files from "../Files/Files.jsx"
 import MainHeader from "./MainHeader/MainHeader.jsx"
 
 const DirsFilesMain = () => {
