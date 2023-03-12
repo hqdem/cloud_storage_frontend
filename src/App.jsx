@@ -7,6 +7,7 @@ import DirsFilesMain from "./components/DirsFilesMain/DirsFilesMain.jsx"
 import Login from "./components/Auth/Login/Login.jsx"
 import SignUp from "./components/Auth/SignUp/SignUp.jsx"
 import {QueryClient, QueryClientProvider} from "react-query"
+import SubDirectory from "./components/SubDirectory/SubDirectory.jsx"
 
 const queryClient = new QueryClient()
 
@@ -18,6 +19,7 @@ function App() {
                 <Main>
                     <Routes>
                         <Route path="/" element={<DirsFilesMain/>}/>
+                        <Route path="dir/:id" element={<SubDirectory />} />
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/signup" element={<SignUp/>}/>
                     </Routes>
