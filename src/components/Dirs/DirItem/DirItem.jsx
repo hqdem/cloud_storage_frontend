@@ -5,7 +5,7 @@ import {Link} from "react-router-dom"
 
 const DirItem = ({id, name, owner}) => {
     return (
-        <Link to={`dir/${id}`}>
+        <Link to={`/dir/${id}`}>
             <div className={classes.dir_item}>
                 <FolderFillIcon/>
                 <span>{name}</span>
