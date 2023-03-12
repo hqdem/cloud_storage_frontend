@@ -16,6 +16,9 @@ const Dirs = () => {
 
     const setJWTPairTokens = useStore(state => state.setJWTPairTokens)
 
+    const isRerenderDirs = useStore(state => state.isRerenderDirs)
+
+
     useEffect(() => {
         if (isRedirect)
             document.location.replace('/login')
@@ -27,7 +30,7 @@ const Dirs = () => {
     }, [])
 
     const {isLoading, refetch} = useQuery({
-        queryKey: ['dirs'],
+        queryKey: ['dirs', isRerenderDirs],
         queryFn: () => getRootDirs(JWTAccessToken),
         retry: false,
         onError: (err) => {

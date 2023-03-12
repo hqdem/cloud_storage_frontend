@@ -19,8 +19,9 @@ const SubDirectory = () => {
 
     const JWTAccessToken = useStore(state => state.JWTAccessToken)
     const JWTRefreshToken = useStore(state => state.JWTRefreshToken)
-
     const setJWTPairTokens = useStore(state => state.setJWTPairTokens)
+
+    const isRerenderBoth = useStore(state => state.isRerenderBoth)
 
     useEffect(() => {
         if (isRedirect)
@@ -33,7 +34,7 @@ const SubDirectory = () => {
     }, [])
 
     const {isLoading, refetch} = useQuery({
-        queryKey: ['subdir', id],
+        queryKey: ['subdir', id, isRerenderBoth],
         queryFn: () => getRetrieveDir(id, JWTAccessToken),
         retry: false,
         onError: (err) => {

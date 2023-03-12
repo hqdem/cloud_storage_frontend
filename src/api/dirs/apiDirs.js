@@ -19,3 +19,11 @@ export const getRetrieveDir = async (dirID, jwtToken) => {
         }
     })
 }
+
+export const createDir = async (data, jwtToken) => {
+    return apiClient.post('dirs/', data, {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`
+        }
+    })
+}
