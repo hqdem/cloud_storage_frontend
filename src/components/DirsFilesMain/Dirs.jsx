@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import DirItem from "./DirItem/DirItem.jsx"
-import classes from './dirs.module.css'
+import DirItem from "../Dirs/DirItem/DirItem.jsx"
+import classes from '../Dirs/dirs.module.css'
 import {useQuery} from "react-query"
 import {useStore} from "../../store/store.js"
 import {getRootDirs} from "../../api/dirs/apiDirs.js"

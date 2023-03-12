@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import classes from './files.module.css'
-import FileItem from "./FileItem/FileItem.jsx"
+import classes from '../Files/files.module.css'
+import FileItem from "../Files/FileItem/FileItem.jsx"
 import {useQuery} from "react-query"
 import {useStore} from "../../store/store.js"
 import {getRootFiles} from "../../api/files/apiFiles.js"
