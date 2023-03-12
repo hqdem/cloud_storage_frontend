@@ -64,7 +64,10 @@ const Files = () => {
                 {rootFiles.map(el => <FileItem
                     key={el.id}
                     name={el.file.split('/')[el.file.split('/').length - 1].substring(0, 10) + '...' + el.file.split('.')[el.file.split('.').length - 1]}
-                    owner={el.owner.username}/>)}
+                    owner={el.owner.username}
+                    file={el.file}
+                    />
+                )}
             </div>
         </div>
     )
