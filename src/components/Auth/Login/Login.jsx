@@ -19,7 +19,7 @@ const Login = () => {
     const setJWTAccessToken = useStore(state => state.setJWTAccessToken)
     const setJWTRefreshToken = useStore(state => state.setJWTRefreshToken)
 
-    const {isLoading, isError, data, error, refetch} = useQuery({
+    const {isLoading, refetch} = useQuery({
         queryKey: ['login'],
         queryFn: () => signInUser({
             username: username,
