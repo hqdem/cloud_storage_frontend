@@ -62,7 +62,7 @@ const Dirs = () => {
             </div>
 
             <div className={classes.dirs_items}>
-                {rootDirs.map(el => <DirItem key={el.id} name={el.name} owner={el.owner.username} />)}
+                {rootDirs.map(el => <DirItem key={el.id} id={el.id} name={el.name} owner={el.owner.username} />)}
             </div>
 
         </div>)

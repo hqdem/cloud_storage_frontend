@@ -7,12 +7,12 @@ const MainHeader = () => {
     return (
         <div className={classes.main_header}>
             <div className={classes.main_header_button}>
-                <AddLineIcon className={classes.plus_icon}/>
+                <AddLineIcon />
                 Создать папку
             </div>
 
             <div className={classes.main_header_button}>
-                <AddLineIcon className={classes.plus_icon}/>
+                <AddLineIcon />
                 Добавить файл
             </div>
 
