@@ -67,7 +67,7 @@ const SubDirectory = () => {
                 <span>Папки</span>
             </div>
             <div className={classesDirs.dirs_items}>
-                {dirs.map(el => <DirItem key={el.id} id={el.id} name={el.name} owner="fix that lol..."/>)}
+                {dirs.map(el => <DirItem key={el.id} id={el.id} name={el.name} owner={el.owner.username}/>)}
             </div>
 
             <div className={classesFiles.files_header}>
