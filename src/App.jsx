@@ -4,6 +4,8 @@ import Main from "./layouts/Main/Main.jsx"
 import Footer from "./layouts/Footer/Footer.jsx"
 import {Routes, Route} from "react-router-dom"
 import DirsFilesMain from "./components/DirsFilesMain/DirsFilesMain.jsx"
+import Login from "./components/Auth/Login/Login.jsx"
+import SignUp from "./components/Auth/SignUp/SignUp.jsx"
 
 function App() {
     return (
@@ -12,6 +14,8 @@ function App() {
             <Main>
                 <Routes>
                     <Route path='/' element={<DirsFilesMain />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/signup' element={<SignUp />} />
                 </Routes>
             </Main>
             <Footer/>
