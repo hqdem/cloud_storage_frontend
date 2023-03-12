@@ -19,8 +19,7 @@ const SignUp = () => {
     const [nonFieldErrors, setNonFieldsErrors] = useState([])
     const [nonFieldsInfo, setNonFieldsInfo] = useState(null)
 
-    const setJWTAccessToken = useStore(state => state.setJWTAccessToken)
-    const setJWTRefreshToken = useStore(state => state.setJWTRefreshToken)
+    const setJWTPairTokens = useStore(state => state.setJWTPairTokens)
 
     const {isLoading, refetch} = useQuery({
         queryKey: ['signup'],
@@ -56,8 +55,10 @@ const SignUp = () => {
             }).then(
                 (res) => {
                     data = res.data
-                    setJWTAccessToken(data.access)
-                    setJWTRefreshToken(data.refresh)
+                    setJWTPairTokens({
+                        access: data.access,
+                        refresh: data.refresh
+                    })
                     setNonFieldsInfo('Успешная регистрация. Редирект на главную через 3 секунды.')
                     setTimeout(() => {
                         window.location.replace('/')

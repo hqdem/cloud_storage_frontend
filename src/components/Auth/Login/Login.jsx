@@ -16,8 +16,8 @@ const Login = () => {
     const [nonFieldsErrors, setNonFieldsErrors] = useState(null)
     const [nonFieldsInfo, setNonFieldsInfo] = useState(null)
 
-    const setJWTAccessToken = useStore(state => state.setJWTAccessToken)
-    const setJWTRefreshToken = useStore(state => state.setJWTRefreshToken)
+    const setJWTPairTokens = useStore(state => state.setJWTPairTokens)
+
 
     const {isLoading, refetch} = useQuery({
         queryKey: ['login'],
@@ -51,8 +51,11 @@ const Login = () => {
         onSuccess: (data) => {
             console.log(data)
             const resData = data.data
-            setJWTAccessToken(resData.access)
-            setJWTRefreshToken(resData.refresh)
+            setJWTPairTokens({
+                access: resData.access,
+                refresh: resData.refresh
+            })
+
             setNonFieldsInfo('Успешный логин. Редирект на главную через 3 секунды.')
             setTimeout(() => {
                 window.location.replace('/')

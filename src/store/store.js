@@ -6,7 +6,12 @@ export const useStore = create(persist((set, get) => ({
         JWTRefreshToken: null,
 
         setJWTAccessToken: (token) => set(state => ({JWTAccessToken: token})),
-        setJWTRefreshToken: (token) => set(state => ({JWTRefreshToken: token}))
+        setJWTRefreshToken: (token) => set(state => ({JWTRefreshToken: token})),
+        setJWTPairTokens: ({access, refresh}) => set(state => ({
+            JWTAccessToken: access,
+            JWTRefreshToken: refresh
+
+        }))
     }),
 
     {name: 'jwtTokenPair'}))
