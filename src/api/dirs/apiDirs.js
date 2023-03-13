@@ -44,3 +44,11 @@ export const deleteDir = async (dirId, jwtToken) => {
         }
     })
 }
+
+export const updateDirInfo = async (dirId, data, jwtToken) => {
+    return apiClient.put(`dirs/${dirId}/`, data,{
+        headers: {
+            Authorization: `Bearer ${jwtToken}`,
+        }
+    })
+}

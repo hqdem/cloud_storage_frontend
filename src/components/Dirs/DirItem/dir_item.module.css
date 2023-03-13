@@ -61,6 +61,18 @@
     color: #371dee;
 }
 
+.dir_check_btn {
+    color: #199807;
+    position: absolute;
+    top: 5px;
+    right: 40px;
+    z-index: 5;
+}
+
+.dir_check_btn:hover {
+    color: #0f6b00;
+}
+
 a {
     text-decoration: none;
     color: black;
