@@ -20,8 +20,24 @@
     background-color: #919191;
 }
 
+.file_item_wrapper {
+    position: relative;
+}
+
 .file_owner_label {
     position: absolute;
     right: 15px;
     bottom: 5px;
+}
+
+.file_delete_btn {
+    display: inline-block;
+    position: absolute;
+    color: red;
+    top: 5px;
+    right: 10px;
+}
+
+.file_delete_btn:hover {
+    color: #9d3838;
 }

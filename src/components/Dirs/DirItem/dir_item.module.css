@@ -27,6 +27,27 @@
     bottom: 5px;
 }
 
+.dir_delete_btn {
+    display: inline-block;
+    position: absolute;
+    color: red;
+    top: 5px;
+    right: 10px;
+}
+
+.dir_delete_btn:hover {
+    color: #9d3838;
+
+}
+
+.dir_item_wrapper {
+    position: relative;
+}
+
+.file_delete_btn {
+
+}
+
 a {
     text-decoration: none;
     color: black;
