@@ -36,3 +36,11 @@ export const addFilesToDir = async (dirID, formData, jwtToken) => {
         }
     })
 }
+
+export const deleteDir = async (dirId, jwtToken) => {
+    return apiClient.delete(`dirs/${dirId}/`, {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`,
+        }
+    })
+}

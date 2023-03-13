@@ -20,3 +20,11 @@ export const createRootFile = async (data, jwtToken) => {
         }
     })
 }
+
+export const deleteFile = async (fileId, jwtToken) => {
+    return apiClient.delete(`files/${fileId}/`, {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`,
+        }
+    })
+}

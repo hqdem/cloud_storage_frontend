@@ -165,6 +165,13 @@ const MainHeader = () => {
                         e.stopPropagation()
                         setIsOpenDirModal(false)
                     }}
+                    style={
+                    {
+                        overlay: {
+                            zIndex: 10
+                        }
+                    }
+                    }
                 >
                     <div className={classes.close_modal} onClick={(e) => closeDirModal(e)}>
                         <CloseLineIcon/>
@@ -188,6 +195,13 @@ const MainHeader = () => {
                         e.stopPropagation()
                         setIsOpenFileModal(false)
                     }}
+                    style={
+                        {
+                            overlay: {
+                                zIndex: 10
+                            }
+                        }
+                    }
                 >
                     <div className={classes.close_modal} onClick={(e) => closeFileModal(e)}>
                         <CloseLineIcon/>
