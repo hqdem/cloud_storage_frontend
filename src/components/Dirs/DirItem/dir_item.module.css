@@ -49,6 +49,18 @@
 
 }
 
+.dir_edit_btn {
+    color: #7B68EEFF;
+    position: absolute;
+    top: 5px;
+    right: 40px;
+    z-index: 5;
+}
+
+.dir_edit_btn:hover {
+    color: #371dee;
+}
+
 a {
     text-decoration: none;
     color: black;

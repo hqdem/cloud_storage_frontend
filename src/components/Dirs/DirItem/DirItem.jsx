@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import FolderFillIcon from "remixicon-react/FolderFillIcon"
 import DeleteBin2FillIcon from "remixicon-react/DeleteBin2FillIcon"
+import PencilFillIcon from "remixicon-react/PencilFillIcon"
 import classes from './dir_item.module.css'
 import {Link} from "react-router-dom"
 import {useQuery} from "react-query"
@@ -74,6 +75,9 @@ const DirItem = ({id, name, owner}) => {
                 </div>
                 <div className={classes.dir_delete_btn} onClick={onDeleteBtnClick}>
                     <DeleteBin2FillIcon />
+                </div>
+                <div className={classes.dir_edit_btn}>
+                    <PencilFillIcon />
                 </div>
             </div>
         </Link>
