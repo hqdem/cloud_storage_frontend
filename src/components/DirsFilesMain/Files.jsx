@@ -15,6 +15,9 @@ const Files = () => {
 
     const setJWTPairTokens = useStore(state => state.setJWTPairTokens)
 
+    const isRerenderFiles = useStore(state => state.isRerenderFiles)
+
+
     useEffect(() => {
         if (isRedirect)
             document.location.replace('/login')
@@ -26,7 +29,7 @@ const Files = () => {
     }, [])
 
     const {isLoading, refetch} = useQuery({
-        queryKey: ['files'],
+        queryKey: ['files', isRerenderFiles],
         queryFn: () => getRootFiles(JWTAccessToken),
         retry: false,
         onError: (err) => {

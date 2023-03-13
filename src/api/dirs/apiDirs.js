@@ -27,3 +27,12 @@ export const createDir = async (data, jwtToken) => {
         }
     })
 }
+
+export const addFilesToDir = async (dirID, formData, jwtToken) => {
+    return apiClient.post(`dirs/${dirID}/add_files/`, formData, {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`,
+            "Content-Type": "multipart/form-data"
+        }
+    })
+}

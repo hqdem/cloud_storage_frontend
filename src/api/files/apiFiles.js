@@ -11,3 +11,12 @@ export const getRootFiles = async (jwtToken) => {
         }
     })
 }
+
+export const createRootFile = async (data, jwtToken) => {
+    return apiClient.post('files/', data, {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`,
+            "Content-Type": "multipart/form-data"
+        }
+    })
+}
