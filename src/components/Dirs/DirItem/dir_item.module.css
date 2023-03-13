@@ -33,6 +33,7 @@
     color: red;
     top: 5px;
     right: 10px;
+    z-index: 5;
 }
 
 .dir_delete_btn:hover {
