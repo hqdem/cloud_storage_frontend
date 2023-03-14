@@ -9,80 +9,36 @@ import {useQuery} from "react-query"
 import {deleteDir, updateDirInfo} from "../../../api/dirs/apiDirs.js"
 import {useStore} from "../../../store/store.js"
 import {refreshJWTToken} from "../../../api/auth/apiAuth.js"
+import {useAuthQuery} from "../../../hooks/useAuthQuery.js"
 
 const DirItem = ({id, name, owner}) => {
 
-    const [isRedirect, setIsRedirect] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [editingName, setEditingName] = useState(name)
 
     const JWTAccessToken = useStore(state => state.JWTAccessToken)
-    const JWTRefreshToken = useStore(state => state.JWTRefreshToken)
-    const setJWTPairTokens = useStore(state => state.setJWTPairTokens)
 
     const toggleIsRerenderBoth = useStore(state => state.toggleIsRerenderBoth)
     const toggleIsRerenderDirs = useStore(state => state.toggleIsRerenderDirs)
 
-    useEffect(() => {
-        if (isRedirect)
-            document.location.replace('/login')
-    }, [isRedirect])
-
-    useEffect(() => {
-        if (!JWTAccessToken)
-            setIsRedirect(true)
-    }, [])
-
-    const {refetch} = useQuery({
+    const {refetch} = useAuthQuery({
         queryKey: ['deleteDir'],
-        queryFn: () => deleteDir(id, JWTAccessToken),
+        func: () => deleteDir(id, JWTAccessToken),
         enabled: false,
         retry: false,
-        onError: (err) => {
-            if (err.response.status === 403) {
-                refreshJWTToken({refresh: JWTRefreshToken}).then(
-                    (res) => {
-                        const data = res.data
-                        setJWTPairTokens({
-                            access: data.access,
-                            refresh: data.refresh
-                        })
-                        refetch()
-                    },
-                    (err) => {
-                        setIsRedirect(true)
-                    }
-                )
-            }
-        }
+        onSuccessFunc: () => {}
     })
 
-    const updateDirObj = useQuery({
+    const updateDirObj = useAuthQuery({
         queryKey: ['update_dir'],
-        queryFn: () => {
+        func: () => {
             updateDirInfo(id, {
                 name: editingName
             }, JWTAccessToken)
         },
         enabled: false,
         retry: false,
-        onError: (err) => {
-            if (err.response.status === 403) {
-                refreshJWTToken({refresh: JWTRefreshToken}).then(
-                    (res) => {
-                        const data = res.data
-                        setJWTPairTokens({
-                            access: data.access,
-                            refresh: data.refresh
-                        })
-                        updateDirObj.refetch()
-                    },
-                    (err) => {
-                        setIsRedirect(true)
-                    }
-                )
-            }
-        }
+        onSuccessFunc: () => {}
     })
 
     const onDeleteBtnClick = (e) => {

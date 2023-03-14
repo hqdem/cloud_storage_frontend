@@ -1,55 +1,24 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import classes from '../Files/files.module.css'
 import FileItem from "../Files/FileItem/FileItem.jsx"
-import {useQuery} from "react-query"
 import {useStore} from "../../store/store.js"
 import {getRootFiles} from "../../api/files/apiFiles.js"
-import {refreshJWTToken} from "../../api/auth/apiAuth.js"
+import {useAuthQuery} from "../../hooks/useAuthQuery.js"
 
 const Files = () => {
-    const [isRedirect, setIsRedirect] = useState(false)
     const [rootFiles, setRootFiles] = useState([])
 
     const JWTAccessToken = useStore(state => state.JWTAccessToken)
-    const JWTRefreshToken = useStore(state => state.JWTRefreshToken)
-
-    const setJWTPairTokens = useStore(state => state.setJWTPairTokens)
 
     const isRerenderFiles = useStore(state => state.isRerenderFiles)
 
 
-    useEffect(() => {
-        if (isRedirect)
-            document.location.replace('/login')
-    }, [isRedirect])
-
-    useEffect(() => {
-        if (!JWTAccessToken)
-            setIsRedirect(true)
-    }, [])
-
-    const {isLoading, refetch} = useQuery({
+    const {isLoading} = useAuthQuery({
         queryKey: ['files', isRerenderFiles],
-        queryFn: () => getRootFiles(JWTAccessToken),
+        func: () => getRootFiles(JWTAccessToken),
+        enabled: true,
         retry: false,
-        onError: (err) => {
-            if (err.response.status === 403) {
-                refreshJWTToken({refresh: JWTRefreshToken}).then(
-                    (res) => {
-                        const data = res.data
-                        setJWTPairTokens({
-                            access: data.access,
-                            refresh: data.refresh
-                        })
-                        refetch()
-                    },
-                    (err) => {
-                        setIsRedirect(true)
-                    }
-                )
-            }
-        },
-        onSuccess: (data) => {
+        onSuccessFunc: (data) => {
             setRootFiles(data.data)
         }
     })

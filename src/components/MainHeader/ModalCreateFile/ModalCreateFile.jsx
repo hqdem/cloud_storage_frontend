@@ -1,42 +1,27 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useRef} from 'react'
 import classes from "../MainHeader.module.css"
 import CloseLineIcon from "remixicon-react/CloseLineIcon"
 import Modal from "react-modal"
 import {useParams} from "react-router-dom"
 import {useStore} from "../../../store/store.js"
-import {useQuery} from "react-query"
 import {addFilesToDir} from "../../../api/dirs/apiDirs.js"
 import {createRootFile} from "../../../api/files/apiFiles.js"
-import {refreshJWTToken} from "../../../api/auth/apiAuth.js"
+import {useAuthQuery} from "../../../hooks/useAuthQuery.js"
 
 const ModalCreateFile = ({isOpenFileModal, setIsOpenFileModal}) => {
 
     const {id} = useParams()
-    const [isRedirect, setIsRedirect] = useState(false)
-
 
     const JWTAccessToken = useStore(state => state.JWTAccessToken)
-    const JWTRefreshToken = useStore(state => state.JWTRefreshToken)
-    const setJWTPairTokens = useStore(state => state.setJWTPairTokens)
 
     const toggleIsRerenderBoth = useStore(state => state.toggleIsRerenderBoth)
     const toggleIsRerenderFiles = useStore(state => state.toggleIsRerenderFiles)
 
     const fileInputRef = useRef()
 
-    useEffect(() => {
-        if (isRedirect)
-            document.location.replace('/login')
-    }, [isRedirect])
-
-    useEffect(() => {
-        if (!JWTAccessToken)
-            setIsRedirect(true)
-    }, [])
-
-    const {refetch} = useQuery({
+    const {refetch} = useAuthQuery({
         queryKey: ['add_files'],
-        queryFn: () => {
+        func: () => {
             if (id) {
                 const newFormData = new FormData()
                 for (const val of fileInputRef.current.files)
@@ -47,11 +32,10 @@ const ModalCreateFile = ({isOpenFileModal, setIsOpenFileModal}) => {
                 newFormData.append('file', fileInputRef.current.files[0])
                 createRootFile(newFormData, JWTAccessToken)
             }
-        }
-        ,
+        },
         enabled: false,
         retry: false,
-        onSuccess: (data) => {
+        onSuccessFunc: (data) => {
             if (id)
                 setTimeout(() => {
                     toggleIsRerenderBoth()
@@ -62,25 +46,6 @@ const ModalCreateFile = ({isOpenFileModal, setIsOpenFileModal}) => {
                     toggleIsRerenderFiles()
                 }, 1000)
             setIsOpenFileModal(false)
-
-
-        },
-        onError: (err) => {
-            if (err.response.status === 403) {
-                refreshJWTToken({refresh: JWTRefreshToken}).then(
-                    (res) => {
-                        const data = res.data
-                        setJWTPairTokens({
-                            access: data.access,
-                            refresh: data.refresh
-                        })
-                        refetch()
-                    },
-                    (err) => {
-                        setIsRedirect(true)
-                    }
-                )
-            }
         }
     })
 

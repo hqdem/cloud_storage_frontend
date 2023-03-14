@@ -4,63 +4,32 @@ import CloseLineIcon from "remixicon-react/CloseLineIcon"
 import Modal from "react-modal"
 import {useParams} from "react-router-dom"
 import {useStore} from "../../../store/store.js"
-import {useQuery} from "react-query"
 import {createDir} from "../../../api/dirs/apiDirs.js"
-import {refreshJWTToken} from "../../../api/auth/apiAuth.js"
+import {useAuthQuery} from "../../../hooks/useAuthQuery.js"
 
 const ModalCreateDir = ({isOpenDirModal, setIsOpenDirModal}) => {
 
     const {id} = useParams()
-    const [isRedirect, setIsRedirect] = useState(false)
     const [dirName, setDirName] = useState('')
 
 
     const JWTAccessToken = useStore(state => state.JWTAccessToken)
-    const JWTRefreshToken = useStore(state => state.JWTRefreshToken)
-    const setJWTPairTokens = useStore(state => state.setJWTPairTokens)
 
     const toggleIsRerenderBoth = useStore(state => state.toggleIsRerenderBoth)
     const toggleIsRerenderDirs = useStore(state => state.toggleIsRerenderDirs)
 
-    useEffect(() => {
-        if (isRedirect)
-            document.location.replace('/login')
-    }, [isRedirect])
-
-    useEffect(() => {
-        if (!JWTAccessToken)
-            setIsRedirect(true)
-    }, [])
-
-    const {refetch} = useQuery({
+    const {refetch} = useAuthQuery({
         queryKey: ['create_dir'],
-        queryFn: () => createDir({
+        func: () => createDir({
             name: dirName !== '' ? dirName : null,
             parent_dir_id: id ? id : null
         }, JWTAccessToken),
         enabled: false,
         retry: false,
-        onSuccess: (data) => {
+        onSuccessFunc: (data) => {
             setIsOpenDirModal(false)
             setDirName('')
         },
-        onError: (err) => {
-            if (err.response.status === 403) {
-                refreshJWTToken({refresh: JWTRefreshToken}).then(
-                    (res) => {
-                        const data = res.data
-                        setJWTPairTokens({
-                            access: data.access,
-                            refresh: data.refresh
-                        })
-                        refetch()
-                    },
-                    (err) => {
-                        setIsRedirect(true)
-                    }
-                )
-            }
-        }
     })
 
     const closeDirModal = (e) => {
