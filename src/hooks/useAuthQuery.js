@@ -1,5 +1,4 @@
 import {useQuery} from "react-query"
-import {createDir} from "../api/dirs/apiDirs.js"
 import {refreshJWTToken} from "../api/auth/apiAuth.js"
 import {useStore} from "../store/store.js"
 import {useEffect, useState} from "react"

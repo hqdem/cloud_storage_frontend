@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import classes from "../MainHeader.module.css"
 import CloseLineIcon from "remixicon-react/CloseLineIcon"
 import Modal from "react-modal"

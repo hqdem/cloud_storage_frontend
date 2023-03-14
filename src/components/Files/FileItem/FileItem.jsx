@@ -1,10 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import classes from './file_item.module.css'
 import File2FillIcon from "remixicon-react/File2FillIcon"
 import DeleteBin2FillIcon from "remixicon-react/DeleteBin2FillIcon"
 import {useStore} from "../../../store/store.js"
-import {useQuery} from "react-query"
-import {refreshJWTToken} from "../../../api/auth/apiAuth.js"
 import {deleteFile} from "../../../api/files/apiFiles"
 import {useAuthQuery} from "../../../hooks/useAuthQuery.js"
 

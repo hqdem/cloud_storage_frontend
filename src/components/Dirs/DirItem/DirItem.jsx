@@ -1,14 +1,12 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import FolderFillIcon from "remixicon-react/FolderFillIcon"
 import DeleteBin2FillIcon from "remixicon-react/DeleteBin2FillIcon"
 import PencilFillIcon from "remixicon-react/PencilFillIcon"
 import CheckFillIcon from "remixicon-react/CheckFillIcon"
 import classes from './dir_item.module.css'
 import {Link} from "react-router-dom"
-import {useQuery} from "react-query"
 import {deleteDir, updateDirInfo} from "../../../api/dirs/apiDirs.js"
 import {useStore} from "../../../store/store.js"
-import {refreshJWTToken} from "../../../api/auth/apiAuth.js"
 import {useAuthQuery} from "../../../hooks/useAuthQuery.js"
 
 const DirItem = ({id, name, owner}) => {
