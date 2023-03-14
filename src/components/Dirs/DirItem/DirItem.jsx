@@ -64,7 +64,10 @@ const DirItem = ({id, name, owner}) => {
         updateDirObj.refetch().then(
             () => {
                 toggleIsRerenderBoth()
-                toggleIsRerenderDirs()
+                setTimeout(() => {
+                    toggleIsRerenderDirs()
+
+                }, 1000)
             }
         )
         setIsEditing(false)
