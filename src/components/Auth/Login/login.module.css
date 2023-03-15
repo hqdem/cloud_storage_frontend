@@ -31,3 +31,9 @@
     color: white;
     min-width: 100px
 }
+
+.sign_up_btn {
+    display: flex;
+    justify-content: flex-end;
+    padding: 2.5%;
+}

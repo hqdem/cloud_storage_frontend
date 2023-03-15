@@ -3,6 +3,7 @@ import classes from './signup.module.css'
 import {useStore} from "../../../store/store.js"
 import {useQuery} from "react-query"
 import {signInUser, signUpUser} from "../../../api/auth/apiAuth.js"
+import {Link} from "react-router-dom"
 
 const SignUp = () => {
     const [email, setEmail] = useState('')
@@ -82,6 +83,11 @@ const SignUp = () => {
 
     return (
         <div className={classes.signup_form}>
+            <div className={classes.login_btn}>
+                <Link to={'/login'}>
+                    Вход
+                </Link>
+            </div>
             <div className={classes.non_field_info}>
                 {nonFieldsInfo ? <p>{nonFieldsInfo}</p> : null}
             </div>

@@ -29,3 +29,9 @@
     background-color: #463d3d;
     color: white;
 }
+
+.login_btn {
+    display: flex;
+    justify-content: flex-end;
+    padding: 2.5%;
+}
