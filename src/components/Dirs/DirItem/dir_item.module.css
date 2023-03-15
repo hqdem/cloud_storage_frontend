@@ -73,6 +73,18 @@
     color: #0f6b00;
 }
 
+.add_shared_user_btn {
+    color: #20ff00;
+    position: absolute;
+    top: 5px;
+    right: 70px;
+    z-index: 5;
+}
+
+.add_shared_user_btn:hover {
+    color: #199807;
+}
+
 a {
     text-decoration: none;
     color: black;

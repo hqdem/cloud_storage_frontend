@@ -42,3 +42,15 @@
 .file_delete_btn:hover {
     color: #9d3838;
 }
+
+.add_shared_user_btn {
+    color: #20ff00;
+    position: absolute;
+    top: 5px;
+    right: 40px;
+    z-index: 5;
+}
+
+.add_shared_user_btn:hover {
+    color: #199807;
+}

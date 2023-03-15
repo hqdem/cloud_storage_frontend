@@ -3,12 +3,14 @@ import FolderFillIcon from "remixicon-react/FolderFillIcon"
 import DeleteBin2FillIcon from "remixicon-react/DeleteBin2FillIcon"
 import PencilFillIcon from "remixicon-react/PencilFillIcon"
 import CheckFillIcon from "remixicon-react/CheckFillIcon"
+import UserAddLineIcon from "remixicon-react/UserAddLineIcon"
 import classes from './dir_item.module.css'
 import {Link, useParams} from "react-router-dom"
 import {deleteDir, updateDirInfo} from "../../../api/dirs/apiDirs.js"
 import {useStore} from "../../../store/store.js"
 import {useAuthMutation} from "../../../hooks/useAuthMutation.js"
 import {useQueryClient} from "react-query"
+import AddSharedUserModal from "./AddSharedUserModal/AddSharedUserModal.jsx"
 
 const DirItem = ({id, name, owner}) => {
 
@@ -17,6 +19,7 @@ const DirItem = ({id, name, owner}) => {
 
     const [isEditing, setIsEditing] = useState(false)
     const [editingName, setEditingName] = useState(name)
+    const [isOpenSharedUserModal, setIsOpenSharedUserModal] = useState(false)
 
     const JWTAccessToken = useStore(state => state.JWTAccessToken)
 
@@ -75,6 +78,12 @@ const DirItem = ({id, name, owner}) => {
         setIsEditing(false)
     }
 
+    const setIsOpenSharedUserModalToTrue = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        setIsOpenSharedUserModal(true)
+    }
+
     return (
         <Link to={`/dir/${id}`}>
             <div className={classes.dir_item_wrapper}>
@@ -106,6 +115,10 @@ const DirItem = ({id, name, owner}) => {
                             <PencilFillIcon />
                         </div>
                 }
+                <div className={classes.add_shared_user_btn} onClick={setIsOpenSharedUserModalToTrue}>
+                    <UserAddLineIcon />
+                    <AddSharedUserModal dirId={id} isOpenSharedUserModal={isOpenSharedUserModal} setIsOpenSharedUserModal={setIsOpenSharedUserModal}/>
+                </div>
             </div>
         </Link>
     )
