@@ -17,11 +17,8 @@ const SubDirectory = () => {
 
     const JWTAccessToken = useStore(state => state.JWTAccessToken)
 
-    const isRerenderBoth = useStore(state => state.isRerenderBoth)
-
-
     useAuthQuery({
-        queryKey: ['subdir', id, isRerenderBoth],
+        queryKey: ['subdir', id],
         func: () => getRetrieveDir(id, JWTAccessToken),
         enabled: true,
         retry: false,

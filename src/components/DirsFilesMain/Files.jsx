@@ -10,11 +10,8 @@ const Files = () => {
 
     const JWTAccessToken = useStore(state => state.JWTAccessToken)
 
-    const isRerenderFiles = useStore(state => state.isRerenderFiles)
-
-
     const {isLoading} = useAuthQuery({
-        queryKey: ['files', isRerenderFiles],
+        queryKey: ['files'],
         func: () => getRootFiles(JWTAccessToken),
         enabled: true,
         retry: false,

@@ -10,11 +10,8 @@ const Dirs = () => {
 
     const JWTAccessToken = useStore(state => state.JWTAccessToken)
 
-    const isRerenderDirs = useStore(state => state.isRerenderDirs)
-
-
     const {isLoading} = useAuthQuery({
-        queryKey: ['dirs', isRerenderDirs],
+        queryKey: ['dirs'],
         func: () => getRootDirs(JWTAccessToken),
         retry: false,
         enabled: true,
