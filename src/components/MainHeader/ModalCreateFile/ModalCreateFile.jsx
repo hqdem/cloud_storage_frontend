@@ -71,6 +71,13 @@ const ModalCreateFile = ({isOpenFileModal, setIsOpenFileModal}) => {
                 <CloseLineIcon/>
             </div>
             <form encType="multipart/form-data" className={classes.form_dir}>
+                {
+                    mutateFile.isLoading
+                        ?
+                        <div>Loading...</div>
+                        :
+                        null
+                }
                 <input type="file" name="files" multiple id="fileupload" ref={fileInputRef}/>
                 <button type="submit" onClick={onSubmitCreateFileClicked}>Загрузить</button>
             </form>

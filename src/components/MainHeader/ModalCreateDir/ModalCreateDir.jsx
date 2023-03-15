@@ -62,6 +62,13 @@ const ModalCreateDir = ({isOpenDirModal, setIsOpenDirModal}) => {
                 <CloseLineIcon/>
             </div>
             <form className={classes.form_dir}>
+                {
+                    mutateDir.isLoading
+                        ?
+                        <div>Loading...</div>
+                        :
+                        null
+                }
                 <input type="text" placeholder="Название папки" value={dirName}
                        onChange={(e) => setDirName(e.target.value)}/>
                 <button type="submit" onClick={onSubmitCreateDirClicked}>Создать</button>
