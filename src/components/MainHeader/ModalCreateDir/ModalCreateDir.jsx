@@ -5,31 +5,31 @@ import Modal from "react-modal"
 import {useParams} from "react-router-dom"
 import {useStore} from "../../../store/store.js"
 import {createDir} from "../../../api/dirs/apiDirs.js"
-import {useAuthQuery} from "../../../hooks/useAuthQuery.js"
+import {useQueryClient} from "react-query"
+import {useAuthMutation} from "../../../hooks/useAuthMutation.js"
 
 const ModalCreateDir = ({isOpenDirModal, setIsOpenDirModal}) => {
 
     const {id} = useParams()
     const [dirName, setDirName] = useState('')
 
-
     const JWTAccessToken = useStore(state => state.JWTAccessToken)
 
-    const toggleIsRerenderBoth = useStore(state => state.toggleIsRerenderBoth)
-    const toggleIsRerenderDirs = useStore(state => state.toggleIsRerenderDirs)
+    const queryClient = useQueryClient()
 
-    const {refetch} = useAuthQuery({
-        queryKey: ['create_dir'],
+    const mutateDir = useAuthMutation({
         func: () => createDir({
             name: dirName !== '' ? dirName : null,
             parent_dir_id: id ? id : null
         }, JWTAccessToken),
-        enabled: false,
-        retry: false,
-        onSuccessFunc: (data) => {
+        onSuccessFunc: () => {
             setIsOpenDirModal(false)
             setDirName('')
-        },
+            if (id)
+                queryClient.invalidateQueries({queryKey: ['subdir']})
+            else
+                queryClient.invalidateQueries({queryKey: ['dirs']})
+        }
     })
 
     const closeDirModal = (e) => {
@@ -38,13 +38,8 @@ const ModalCreateDir = ({isOpenDirModal, setIsOpenDirModal}) => {
     }
 
     const onSubmitCreateDirClicked = (e) => {
-        refetch().then(() =>{
-            if (id)
-                toggleIsRerenderBoth()
-            else
-                toggleIsRerenderDirs()
-            })
         e.preventDefault()
+        mutateDir.mutate()
     }
 
     return (

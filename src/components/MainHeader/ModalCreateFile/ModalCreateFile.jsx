@@ -6,7 +6,8 @@ import {useParams} from "react-router-dom"
 import {useStore} from "../../../store/store.js"
 import {addFilesToDir} from "../../../api/dirs/apiDirs.js"
 import {createRootFile} from "../../../api/files/apiFiles.js"
-import {useAuthQuery} from "../../../hooks/useAuthQuery.js"
+import {useAuthMutation} from "../../../hooks/useAuthMutation.js"
+import {useQueryClient} from "react-query"
 
 const ModalCreateFile = ({isOpenFileModal, setIsOpenFileModal}) => {
 
@@ -14,38 +15,29 @@ const ModalCreateFile = ({isOpenFileModal, setIsOpenFileModal}) => {
 
     const JWTAccessToken = useStore(state => state.JWTAccessToken)
 
-    const toggleIsRerenderBoth = useStore(state => state.toggleIsRerenderBoth)
-    const toggleIsRerenderFiles = useStore(state => state.toggleIsRerenderFiles)
+    const queryClient = useQueryClient()
 
     const fileInputRef = useRef()
 
-    const {refetch} = useAuthQuery({
-        queryKey: ['add_files'],
+    const mutateFile = useAuthMutation({
         func: () => {
             if (id) {
                 const newFormData = new FormData()
                 for (const val of fileInputRef.current.files)
                     newFormData.append('files', val)
-                addFilesToDir(id, newFormData, JWTAccessToken)
+                return addFilesToDir(id, newFormData, JWTAccessToken)
             } else {
                 const newFormData = new FormData()
                 newFormData.append('file', fileInputRef.current.files[0])
-                createRootFile(newFormData, JWTAccessToken)
+                return createRootFile(newFormData, JWTAccessToken)
             }
         },
-        enabled: false,
-        retry: false,
-        onSuccessFunc: (data) => {
-            if (id)
-                setTimeout(() => {
-                    toggleIsRerenderBoth()
-                }, 1000)
-
-            else
-                setTimeout(() => {
-                    toggleIsRerenderFiles()
-                }, 1000)
+        onSuccessFunc: () => {
             setIsOpenFileModal(false)
+            if (id)
+                queryClient.invalidateQueries({queryKey: ['subdir']})
+            else
+                queryClient.invalidateQueries({queryKey: ['files']})
         }
     })
 
@@ -55,8 +47,8 @@ const ModalCreateFile = ({isOpenFileModal, setIsOpenFileModal}) => {
     }
 
     const onSubmitCreateFileClicked = (e) => {
-        refetch()
         e.preventDefault()
+        mutateFile.mutate()
     }
 
     return (

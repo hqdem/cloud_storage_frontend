@@ -4,50 +4,61 @@ import DeleteBin2FillIcon from "remixicon-react/DeleteBin2FillIcon"
 import PencilFillIcon from "remixicon-react/PencilFillIcon"
 import CheckFillIcon from "remixicon-react/CheckFillIcon"
 import classes from './dir_item.module.css'
-import {Link} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 import {deleteDir, updateDirInfo} from "../../../api/dirs/apiDirs.js"
 import {useStore} from "../../../store/store.js"
-import {useAuthQuery} from "../../../hooks/useAuthQuery.js"
+import {useAuthMutation} from "../../../hooks/useAuthMutation.js"
+import {useQueryClient} from "react-query"
 
 const DirItem = ({id, name, owner}) => {
+
+    const params = useParams()
+    const dirId = params.id
 
     const [isEditing, setIsEditing] = useState(false)
     const [editingName, setEditingName] = useState(name)
 
     const JWTAccessToken = useStore(state => state.JWTAccessToken)
 
-    const toggleIsRerenderBoth = useStore(state => state.toggleIsRerenderBoth)
-    const toggleIsRerenderDirs = useStore(state => state.toggleIsRerenderDirs)
+    const queryClient = useQueryClient()
 
-    const {refetch} = useAuthQuery({
-        queryKey: ['deleteDir'],
+    const deleteDirMutation = useAuthMutation({
         func: () => deleteDir(id, JWTAccessToken),
-        enabled: false,
-        retry: false,
-        onSuccessFunc: () => {}
+        onSuccessFunc: () => {
+            if (dirId)
+                queryClient.invalidateQueries({
+                    queryKey: ['subdir']
+                })
+            else
+                queryClient.invalidateQueries({
+                    queryKey: ['dirs']
+                })
+        }
     })
 
-    const updateDirObj = useAuthQuery({
-        queryKey: ['update_dir'],
+    const updateDirMutation = useAuthMutation({
         func: () => {
-            updateDirInfo(id, {
+            return updateDirInfo(id, {
                 name: editingName
             }, JWTAccessToken)
         },
-        enabled: false,
-        retry: false,
-        onSuccessFunc: () => {}
+        onSuccessFunc: () => {
+            console.log(dirId)
+            if (dirId)
+                queryClient.invalidateQueries({
+                    queryKey: ['subdir']
+                })
+            else
+                queryClient.invalidateQueries({
+                    queryKey: ['dirs']
+                })
+        }
     })
 
     const onDeleteBtnClick = (e) => {
         e.stopPropagation()
         e.preventDefault()
-        refetch().then(
-            () => {
-                toggleIsRerenderBoth()
-                toggleIsRerenderDirs()
-            }
-        )
+        deleteDirMutation.mutate()
     }
 
     const setIsEditingToTrue = (e) => {
@@ -61,15 +72,7 @@ const DirItem = ({id, name, owner}) => {
             setIsEditing(false)
             return
         }
-        updateDirObj.refetch().then(
-            () => {
-                toggleIsRerenderBoth()
-                setTimeout(() => {
-                    toggleIsRerenderDirs()
-
-                }, 1000)
-            }
-        )
+        updateDirMutation.mutate()
         setIsEditing(false)
     }
 

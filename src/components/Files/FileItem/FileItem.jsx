@@ -4,33 +4,37 @@ import File2FillIcon from "remixicon-react/File2FillIcon"
 import DeleteBin2FillIcon from "remixicon-react/DeleteBin2FillIcon"
 import {useStore} from "../../../store/store.js"
 import {deleteFile} from "../../../api/files/apiFiles"
-import {useAuthQuery} from "../../../hooks/useAuthQuery.js"
+import {useAuthMutation} from "../../../hooks/useAuthMutation.js"
+import {useParams} from "react-router-dom"
+import {useQueryClient} from "react-query"
 
 const FileItem = ({id, name, owner, file}) => {
 
+    const params = useParams()
+    const dirId = params.id
+
     const JWTAccessToken = useStore(state => state.JWTAccessToken)
 
-    const toggleIsRerenderBoth = useStore(state => state.toggleIsRerenderBoth)
-    const toggleIsRerenderFiles = useStore(state => state.toggleIsRerenderFiles)
+    const queryClient = useQueryClient()
 
-
-    const {refetch} = useAuthQuery({
-        queryKey: ['deleteFile'],
+    const deleteFileMutation = useAuthMutation({
         func: () => deleteFile(id, JWTAccessToken),
-        enabled: false,
-        retry: false,
-        onSuccessFunc: () => {}
+        onSuccessFunc: () => {
+            if (dirId)
+                queryClient.invalidateQueries({
+                    queryKey: ['subdir']
+                })
+            else
+                queryClient.invalidateQueries({
+                    queryKey: ['files']
+                })
+        }
     })
 
     const onDeleteBtnClick = (e) => {
         e.stopPropagation()
         e.preventDefault()
-        refetch().then(
-            () => {
-                toggleIsRerenderBoth()
-                toggleIsRerenderFiles()
-            }
-        )
+        deleteFileMutation.mutate()
     }
 
     return (
