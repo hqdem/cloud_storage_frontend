@@ -43,7 +43,6 @@ const DirItem = ({id, name, owner}) => {
             }, JWTAccessToken)
         },
         onSuccessFunc: () => {
-            console.log(dirId)
             if (dirId)
                 queryClient.invalidateQueries({
                     queryKey: ['subdir']
