@@ -28,3 +28,11 @@ export const deleteFile = async (fileId, jwtToken) => {
         }
     })
 }
+
+export const addSharedUserToFile = async (fileId, data, jwtToken) => {
+    return apiClient.post(`files/${fileId}/add_shared_user/`, data, {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`,
+        }
+    })
+}

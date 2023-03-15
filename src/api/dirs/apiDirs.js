@@ -52,3 +52,11 @@ export const updateDirInfo = async (dirId, data, jwtToken) => {
         }
     })
 }
+
+export const addSharedUserToDir = async (dirId, data, jwtToken) => {
+    return apiClient.post(`dirs/${dirId}/add_shared_user/`, data, {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`,
+        }
+    })
+}
