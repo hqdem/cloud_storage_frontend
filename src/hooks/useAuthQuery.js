@@ -29,7 +29,7 @@ export const useAuthQuery = ({func, onSuccessFunc, onErrorFunc, queryKey, enable
         onSuccess: onSuccessFunc,
         onError: (err) => {
             if (onErrorFunc)
-                onErrorFuncFunc()
+                onErrorFunc(err)
             if (err.response.status === 403) {
                 refreshJWTToken({refresh: JWTRefreshToken}).then(
                     (res) => {

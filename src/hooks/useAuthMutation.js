@@ -26,7 +26,7 @@ export const useAuthMutation = ({func, onSuccessFunc, onErrorFunc}) => {
         onSuccess: onSuccessFunc,
         onError: (err) => {
             if (onErrorFunc)
-                onErrorFunc()
+                onErrorFunc(err)
             if (err.response.status === 403) {
                 refreshJWTToken({refresh: JWTRefreshToken}).then(
                     (res) => {
