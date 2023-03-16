@@ -3,6 +3,8 @@
 .header {
     align-items: center;
     column-gap: 5%;
+    position: relative;
+    min-width: 100vw;
     /*justify-content: space-between;*/
 }
 
@@ -68,8 +70,10 @@
 /* LOGIN */
 
 .login {
-    background-color: #da2828;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
+    /*background-color: #da2828;*/
+    /*height: 50px;*/
+    /*width: 50px;*/
+    /*border-radius: 50%;*/
+    /*position: absolute;*/
+    /*right: 10%;*/
 }

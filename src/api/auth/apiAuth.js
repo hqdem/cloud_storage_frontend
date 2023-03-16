@@ -12,3 +12,11 @@ export const signInUser = async (data) => {
 export const refreshJWTToken = async (data) => {
     return apiClient.post('auth/jwt/refresh/', data)
 }
+
+export const getCurrentUser = async (jwtToken) => {
+    return apiClient.get('auth/users/me', {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`
+        }
+    })
+}

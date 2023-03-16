@@ -3,6 +3,7 @@ import classes from './header.module.css'
 import logo from '../../assets/images/logo.png'
 import Search2LineIcon from 'remixicon-react/Search2LineIcon'
 import {Link} from "react-router-dom"
+import HeaderLogin from "./HeaderLogin/HeaderLogin.jsx"
 
 const Header = () => {
     return (
@@ -20,7 +21,7 @@ const Header = () => {
             </div>
 
             <div className={classes.login}>
-
+                <HeaderLogin />
             </div>
 
         </div>
