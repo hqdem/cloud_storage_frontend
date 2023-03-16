@@ -37,6 +37,8 @@ const AddSharedUserModal = ({dirId, isOpenSharedUserModal, setIsOpenSharedUserMo
         onErrorFunc: (err) => {
             if (err.response.status === 404)
                 setUsernameError('Пользователя с таким именем не существует')
+            if (err.response.status === 403 && err.response.data.detail === 'У вас недостаточно прав для выполнения данного действия.')
+                setUsernameError('У вас недостаточно прав для выполнения данного действия')
         }
     })
 
