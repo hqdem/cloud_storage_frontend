@@ -30,7 +30,7 @@ export const useAuthQuery = ({func, onSuccessFunc, onErrorFunc, queryKey, enable
         onError: (err) => {
             if (onErrorFunc)
                 onErrorFunc(err)
-            if (err.response.status === 403) {
+            if (err.response.status === 403 && err.response.data.detail === 'Данный токен недействителен для любого типа токена') {
                 refreshJWTToken({refresh: JWTRefreshToken}).then(
                     (res) => {
                         const data = res.data
