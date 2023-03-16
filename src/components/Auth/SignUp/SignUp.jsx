@@ -83,11 +83,6 @@ const SignUp = () => {
 
     return (
         <div className={classes.signup_form}>
-            <div className={classes.login_btn}>
-                <Link to={'/login'}>
-                    Вход
-                </Link>
-            </div>
             <div className={classes.non_field_info}>
                 {nonFieldsInfo ? <p>{nonFieldsInfo}</p> : null}
             </div>

@@ -74,11 +74,6 @@ const Login = () => {
 
     return (
         <div className={classes.login_form}>
-            <div className={classes.sign_up_btn}>
-                <Link to={'/signup'}>
-                    Регистрация
-                </Link>
-            </div>
             <div className={classes.non_fields_info}>
                 {nonFieldsInfo ? <p>{nonFieldsInfo}</p> : null}
             </div>
